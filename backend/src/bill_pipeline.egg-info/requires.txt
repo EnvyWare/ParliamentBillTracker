@@ -1,0 +1,11 @@
+tzdata>=2025.2
+
+[dev]
+boto3>=1.35
+botocore>=1.35
+jsonschema>=4.23
+mypy>=1.13
+pytest>=8.3
+pytest-cov>=6.0
+ruff>=0.8
+types-boto3>=1.35
