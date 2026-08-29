@@ -1,0 +1,100 @@
+[project]
+name = "bill-pipeline"
+version = "1.0.0"
+description = "Scheduled ingestion Lambda that normalises UK Parliament Bills API data into a static snapshot."
+readme = "../README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "Daniel Norris" }]
+
+# Runtime dependencies are deliberately almost empty.
+#
+# The handler uses the Python standard library plus boto3, which the AWS Lambda
+# Python 3.13 runtime already provides. The single bundled dependency is the
+# IANA time zone database: Europe/London is required to derive Parliamentary
+# calendar dates correctly, and depending on the base image to carry system
+# zoneinfo would make that correctness environment-specific. tzdata is pure
+# data with no compiled extension, so the ARM64 ZIP still builds on any
+# platform and the whole package stays well under a megabyte.
+dependencies = ["tzdata>=2025.2"]
+
+[project.optional-dependencies]
+dev = [
+  "boto3>=1.35",
+  "botocore>=1.35",
+  "jsonschema>=4.23",
+  "mypy>=1.13",
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "ruff>=0.8",
+  "types-boto3>=1.35",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q --strict-markers --strict-config"
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["bill_pipeline"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "I",   # isort
+  "N",   # pep8-naming
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear
+  "A",   # flake8-builtins
+  "C4",  # flake8-comprehensions
+  "DTZ", # flake8-datetimez - guards against naive UTC assumptions
+  "SIM", # flake8-simplify
+  "PTH", # flake8-use-pathlib
+  "RUF",
+]
+ignore = [
+  "N818", # exception naming is intentional and reads better without a Error suffix everywhere
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
+
+[tool.mypy]
+python_version = "3.13"
+mypy_path = "src"
+packages = ["bill_pipeline"]
+strict = true
+warn_unreachable = true
+disallow_any_generics = true
+no_implicit_reexport = true
+
+[[tool.mypy.overrides]]
+module = ["boto3.*", "botocore.*"]
+ignore_missing_imports = true
