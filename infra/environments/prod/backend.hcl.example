@@ -1,0 +1,10 @@
+# Copy to backend.hcl and fill in. backend.hcl is gitignored.
+#
+# bucket: the state bucket created by infra/bootstrap, or an existing private
+#         Terraform state bucket you already operate.
+
+bucket       = "uk-bill-pipeline-tfstate-000000000000"
+key          = "uk-bill-pipeline/prod/terraform.tfstate"
+region       = "eu-west-2"
+encrypt      = true
+use_lockfile = true
