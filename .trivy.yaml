@@ -1,0 +1,20 @@
+# Trivy configuration scan of the Terraform sources.
+#
+# Only HIGH and CRITICAL fail the build. Lower severities are usually style
+# preferences that conflict with a deliberate decision made elsewhere in this
+# repository, and a check that always fires is a check nobody reads.
+
+severity:
+  - HIGH
+  - CRITICAL
+
+misconfiguration:
+  # Terraform is scanned as source, not as a rendered plan, so a value that
+  # comes from a variable is unknown to the scanner.
+  terraform:
+    exclude-downloaded-modules: true
+
+scan:
+  skip-dirs:
+    - '**/.terraform'
+    - '**/tests'

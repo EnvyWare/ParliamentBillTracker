@@ -1,0 +1,29 @@
+# Trivy findings that are deliberate decisions, each with its reason.
+#
+# Anything listed here is a conscious trade-off, not an oversight. If a reason
+# stops being true, delete the line and fix the finding.
+
+# CloudFront access logging.
+# Off by default because it writes billable S3 objects continuously for a site
+# whose whole design target is effectively zero cost. It is a variable:
+# set enable_cloudfront_access_logs = true to turn it on.
+AVD-AWS-0010
+
+# CloudFront WAF.
+# A WAF is a standing monthly charge well beyond this project's cost target,
+# and the distribution serves only static, public, read-only content with no
+# forms, no authentication and no request-time backend. A CloudFront pricing
+# plan may attach its own managed ACL, which the distribution tolerates.
+AVD-AWS-0011
+
+# S3 bucket logging.
+# Access logging on the site and data buckets would write billable objects for
+# traffic that CloudFront already fronts. Both buckets are private, readable
+# only by this distribution through Origin Access Control.
+AVD-AWS-0089
+
+# Customer-managed KMS key for S3.
+# There are no secrets in this system: it publishes public Parliamentary
+# information. SSE-S3 encrypts at rest without the standing monthly charge of
+# a customer-managed key.
+AVD-AWS-0132
