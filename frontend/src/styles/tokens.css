@@ -1,7 +1,24 @@
 /*
- * Original visual identity for UK Bill Pipeline.
+ * EnvyWare brand system, applied to UK Bill Pipeline.
  *
- * Neutral navy and slate foundations with restrained teal and amber accents.
+ * "Voltage, in Ember": warm near-black, one hot orange accent, flat colour.
+ * Dark is the default surface; the Cream light theme is served only to people
+ * whose system asks for light.
+ *
+ * Brand palette, used verbatim and never recoloured:
+ *   Char #120C0A · Ember #FF5A1F · Amber #FFB347 · Rust #C2410C · Cream #FBF4EE
+ *
+ * Two brand rules shape everything below and are easy to break by accident:
+ *
+ * 1. Ember is a large-text and graphic accent only. At body sizes it does not
+ *    reach 4.5:1 on Char, so running text on dark is white or Amber and never
+ *    Ember. On the Cream theme, links are Rust rather than Ember for the same
+ *    reason.
+ * 2. One Ember element does the work on any given screen. Here that is the
+ *    chevron in the mark. Everything else that needs to be distinguishable
+ *    uses Amber, Rust, or a tinted surface, so no gradient or glow is needed
+ *    anywhere.
+ *
  * Nothing here imitates the Crowned Portcullis, the Royal Arms, any UK
  * Parliament logo or wordmark, or the colour system of the video that
  * inspired the project.
@@ -9,58 +26,91 @@
  * Colour is never the only carrier of meaning: House, status and warnings all
  * have text labels or shapes alongside their colour. Contrast targets are
  * WCAG 2.2 AA - at least 4.5:1 for normal text and 3:1 for meaningful
- * graphics and UI boundaries.
+ * graphics and UI boundaries. Ratios in comments are measured against the
+ * surface named above them.
  */
 
-:root {
-  color-scheme: light;
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/poppins-latin-v24.woff2') format('woff2');
+}
 
-  /* Surfaces */
-  --surface-page: #f4f6f9;
-  --surface-raised: #ffffff;
-  --surface-sunken: #eaeef4;
-  --surface-inverse: #12203a;
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin-v20.woff2') format('woff2');
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Brand constants. These five never change between themes. */
+  --char: #120c0a;
+  --ember: #ff5a1f;
+  --amber: #ffb347;
+  --rust: #c2410c;
+  --cream: #fbf4ee;
+
+  /* Surfaces. Char, and two lifts above it that stay warm rather than grey. */
+  --surface-page: #120c0a;
+  --surface-raised: #1c1512;
+  --surface-sunken: #0d0806;
+  --surface-inverse: #fbf4ee;
 
   /* Ink. All measured against --surface-raised. */
-  --ink-strong: #101d33; /* 15.9:1 */
-  --ink: #1e2c46; /* 12.1:1 */
-  --ink-muted: #4c5871; /* 7.1:1 */
-  --ink-subtle: #5c6880; /* 5.5:1 */
-  --ink-inverse: #f4f6f9;
+  --ink-strong: #fbf4ee; /* 15.7:1 */
+  --ink: #ede2d9; /* 13.6:1 */
+  --ink-muted: #c3b3a8; /* 8.5:1 */
+  --ink-subtle: #a39287; /* 5.6:1 */
+  --ink-inverse: #120c0a;
 
   /* Lines */
-  --line: #d3dae5;
-  --line-strong: #9aa6ba; /* 3.1:1 against white, for meaningful boundaries */
+  --line: #33261f;
+  --line-strong: #574238; /* 3.1:1 against --surface-raised */
 
-  /* Accents */
-  --accent: #0b6b6d; /* teal, 5.5:1 on white */
-  --accent-strong: #075052;
-  --accent-wash: #e4f2f2;
-  --amber: #8a5200; /* 6.0:1 on white */
-  --amber-wash: #fbf0dd;
+  /* Accents. --accent is the interactive colour and must pass at body size,
+     so it is Amber rather than Ember. --accent-loud is the single Ember
+     highlight, reserved for the mark and for large graphic strokes. */
+  --accent: #ffb347; /* Amber, 10.4:1 */
+  --accent-strong: #ffc978;
+  --accent-loud: #ff5a1f; /* Ember. Large text and graphics only. */
+  --accent-wash: #2e1d13;
+  --amber-wash: #2e2113;
 
-  /* House identity. Always paired with a visible text label. */
-  --commons: #0b6b6d;
-  --commons-wash: #e4f2f2;
-  --lords: #6a4595; /* 6.2:1 on white */
-  --lords-wash: #efe9f7;
-  --shared: #4c5871;
-  --shared-wash: #e9ecf3;
+  /* House identity. Always paired with a visible text label, so these carry
+     emphasis rather than meaning. Both sit in the warm brand family: the
+     brand admits no green, blue or magenta. */
+  --commons: #ffb347; /* Amber */
+  --commons-wash: #2e2113;
+  --lords: #f0a08a; /* warm clay, 8.9:1 */
+  --lords-wash: #33201b;
+  --shared: #c3b3a8;
+  --shared-wash: #241a15;
 
-  /* Status */
-  --status-warning: #8a5200;
-  --status-warning-wash: #fbf0dd;
-  --status-error: #98202e; /* 7.0:1 on white */
-  --status-error-wash: #fbe9eb;
-  --status-ok: #1f6b3f;
-  --status-ok-wash: #e4f2ea;
+  /* Status. Shape and text carry these too; see the .status-* rules. */
+  --status-warning: #ffb347;
+  --status-warning-wash: #2e2113;
+  --status-error: #ff8a63; /* 8.0:1. Rust itself is too dark on Char. */
+  --status-error-wash: #331a12;
+  --status-ok: #cbd5a8; /* warm sage, 10.6:1, never a signal on its own */
+  --status-ok-wash: #232617;
 
-  --focus-ring: #0b3d91;
+  --focus-ring: #ff5a1f;
 
-  /* Type. System stack only: no remote font is ever requested. */
+  /* Type. Self-hosted: the CSP sets font-src 'self', so no remote font can be
+     requested even by accident. Poppins Bold for headings, Inter for body,
+     and the system mono stack for labels and figures. */
+  --font-display: 'Poppins', 'Space Grotesk', system-ui, sans-serif;
   --font-body:
-    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif;
+  --font-mono:
+    ui-monospace, 'JetBrains Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
@@ -83,11 +133,68 @@
   --radius: 8px;
   --radius-lg: 12px;
 
-  --shadow-card: 0 1px 2px rgb(16 29 51 / 8%);
-  --shadow-sheet: -8px 0 32px rgb(16 29 51 / 18%);
+  /* Flat colour, no glow. Depth on dark comes from a lifted surface and a
+     line, with the shadow only deep enough to separate a sheet from the page. */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-sheet: -8px 0 32px rgb(0 0 0 / 55%);
 
   /* Touch targets stay at least 44x44 CSS pixels on touch layouts. */
   --touch-target: 44px;
 
   --max-width: 1600px;
+}
+
+/*
+ * Cream theme. Served only where the system asks for light, because the brand
+ * is dark by default. The E flips to Char, links become Rust, and Ember stays
+ * a large-graphic accent exactly as it is on dark.
+ */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+
+    --surface-page: #fbf4ee;
+    --surface-raised: #ffffff;
+    --surface-sunken: #f3e9e0;
+    --surface-inverse: #120c0a;
+
+    /* Measured against --surface-raised. */
+    --ink-strong: #120c0a; /* 18.7:1 */
+    --ink: #2a1f1a; /* 14.6:1 */
+    --ink-muted: #5c4a41; /* 7.9:1 */
+    --ink-subtle: #6f5c52; /* 5.9:1 */
+    --ink-inverse: #fbf4ee;
+
+    --line: #e5d8cd;
+    --line-strong: #a08b7d; /* 3.1:1 */
+
+    /* Rust, darkened. Links on light are Rust rather than Ember, but Rust
+       itself measures 4.3:1 on --surface-sunken, and link text has to clear
+       4.5:1 on every surface it can land on, not just on white. True Rust is
+       still available as --rust for borders and graphics, where 3:1 applies. */
+    --accent: #a13509; /* 6.9:1 on raised, 5.8:1 on sunken */
+    --accent-strong: #7d2907;
+    --accent-loud: #ff5a1f;
+    --accent-wash: #fdece3;
+    --amber-wash: #fdf0dc;
+
+    --commons: #b45309; /* 4.9:1 */
+    --commons-wash: #fdf0dc;
+    --lords: #a83a28; /* 6.4:1 */
+    --lords-wash: #fbe8e3;
+    --shared: #5c4a41;
+    --shared-wash: #f3ece6;
+
+    --status-warning: #9a5b09;
+    --status-warning-wash: #fdf0dc;
+    --status-error: #a8301c; /* 7.1:1 */
+    --status-error-wash: #fbe7e3;
+    --status-ok: #4f6b2a; /* 5.1:1 */
+    --status-ok-wash: #eef2e2;
+
+    --focus-ring: #c2410c;
+
+    --shadow-card: 0 1px 2px rgb(18 12 10 / 10%);
+    --shadow-sheet: -8px 0 32px rgb(18 12 10 / 20%);
+  }
 }
