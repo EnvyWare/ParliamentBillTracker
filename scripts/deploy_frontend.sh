@@ -60,13 +60,20 @@ if [ -d "${DIST}/fonts" ]; then
 fi
 
 echo "Uploading root documents to s3://${BUCKET}/"
-# --exclude assets/* leaves the immutable upload above untouched. The --delete
-# here is scoped to the site bucket, which is a different bucket from the one
-# holding the published snapshot: this command cannot reach the data.
+# --exclude assets/* and fonts/* leave the immutable uploads above untouched.
+# The --delete here is scoped to the site bucket, which is a different bucket
+# from the one holding the published snapshot: this command cannot reach the
+# data.
+#
+# data/* is excluded because the build tree contains the synthetic development
+# fixture at dist/data/current.json. CloudFront routes /data/* to the data
+# origin, so an uploaded copy would not be served, but a file of invented Bills
+# has no business sitting in the production site bucket at all.
 aws s3 sync "${DIST}" "s3://${BUCKET}" \
   --cache-control "public,max-age=0,must-revalidate" \
   --exclude "assets/*" \
   --exclude "fonts/*" \
+  --exclude "data/*" \
   --delete \
   --no-progress
 
