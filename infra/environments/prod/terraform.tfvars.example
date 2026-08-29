@@ -1,0 +1,94 @@
+# Copy to terraform.tfvars and edit. terraform.tfvars is gitignored.
+#
+# Nothing here is secret, but it is left uncommitted so that a fork does not
+# inherit another deployment's session, domain or notification addresses.
+#
+# Only the "Required" block below is needed. Everything commented out is
+# optional: leave it commented and the feature does not exist, rather than
+# existing in some disabled half-state. infra/README.md says what each one
+# actually creates.
+
+# ---------------------------------------------------------------------------
+# Required
+# ---------------------------------------------------------------------------
+
+# VERIFY THIS BEFORE EVERY APPLY.
+#
+# The Bills API has no dependable current-session lookup, so the session is
+# explicit configuration. Check it against the API before deploying:
+#
+#   curl -s "https://bills-api.parliament.uk/api/v1/Bills?Skip=0&Take=1&SortOrder=DateUpdatedDescending" \
+#     | python -c "import json,sys; print(json.load(sys.stdin)['items'][0]['introducedSessionId'])"
+#
+# If ingestion later sees a newer session it fails the run and keeps serving
+# the last good snapshot, rather than publishing a session that has ended.
+parliament_session_id    = 40
+parliament_session_label = "2026-27"
+
+# ---------------------------------------------------------------------------
+# Identity and tagging. Defaults work; these two are worth setting.
+# ---------------------------------------------------------------------------
+
+github_repository = "your-org/uk-bill-pipeline"
+owner             = "your-team"
+
+# aws_region   = "eu-west-2"
+# project_name = "uk-bill-pipeline"
+# environment  = "prod"
+
+# ---------------------------------------------------------------------------
+# Optional: custom domain
+#
+# Without either of these the site is served on its *.cloudfront.net hostname,
+# which is a complete, working deployment.
+# ---------------------------------------------------------------------------
+
+# Requests a certificate in us-east-1 and attaches the alias.
+# domain_name = "bills.example.com"
+
+# Add this as well and Terraform manages DNS too. The zone must already exist:
+# none is created, because a hosted zone is a standing monthly charge. Leave
+# it out when DNS lives anywhere else (Cloudflare, and others) and add the two
+# records by hand — see docs/deployment.md#custom-domain.
+# hosted_zone_id = "Z0123456789ABCDEFGHIJ"
+
+# ---------------------------------------------------------------------------
+# Optional: notifications and cost
+# ---------------------------------------------------------------------------
+
+# The four alarms exist either way and show their state in the console. This
+# only decides whether they also email someone. An SNS subscription stays
+# pending until the address is confirmed by email.
+# alarm_email = "alerts@example.com"
+
+# Creates an AWS Budget. A budget sends alerts; it is not a spending cap.
+# budget_alert_email = "billing@example.com"
+# monthly_budget_usd = 5
+
+# CloudFront access logs. Both are needed together: no log bucket is created
+# here, because standard logging needs a bucket with ACLs enabled and that is
+# a decision about your own account. Off by default because it writes billable
+# objects continuously.
+# enable_cloudfront_access_logs            = true
+# cloudfront_access_log_bucket_domain_name = "my-logs.s3.amazonaws.com"
+
+# ---------------------------------------------------------------------------
+# Optional: ingestion behaviour
+# ---------------------------------------------------------------------------
+
+# Pause ingestion without destroying anything. The schedule is disabled rather
+# than deleted, and the last published snapshot keeps serving.
+# ingestion_enabled = false
+
+# How often ingestion runs. Faster mostly re-reads unchanged Bills.
+# schedule_expression = "rate(30 minutes)"
+
+# MUST be null on an account whose Lambda concurrency quota is 10: AWS rejects
+# a reservation that would take unreserved concurrency below 10, and the apply
+# fails with InvalidParameterValueException. Check with
+#   aws lambda get-account-settings --query 'AccountLimit.ConcurrentExecutions'
+# lambda_reserved_concurrency = null
+
+# Retention. Both expire so nothing accumulates cost indefinitely.
+# lambda_log_retention_days = 14
+# archive_retention_days    = 90
