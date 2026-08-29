@@ -21,11 +21,6 @@
 
 set -euo pipefail
 
-# Git Bash rewrites arguments that look like absolute paths, which turns a
-# CloudFront invalidation path of "/" into a Windows directory. Harmless
-# elsewhere; essential on Windows.
-export MSYS_NO_PATHCONV=1
-
 BUCKET="${1:-}"
 DISTRIBUTION_ID="${2:-}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -82,7 +77,13 @@ if [ -n "${DISTRIBUTION_ID}" ]; then
   # deployment would be wasteful and is never necessary here, because every
   # other object is either fingerprinted or short-lived by policy.
   echo "Invalidating / and /index.html on ${DISTRIBUTION_ID}"
-  aws cloudfront create-invalidation \
+  # MSYS_NO_PATHCONV is scoped to this one command on purpose. Git Bash
+  # rewrites arguments that look like absolute paths, which turns an
+  # invalidation path of "/" into a Windows directory. Exporting it for the
+  # whole script also stops the rewriting that the Windows AWS CLI *needs*
+  # for the sync source directories above, which fails them with
+  # "The user-provided path ... does not exist".
+  MSYS_NO_PATHCONV=1 aws cloudfront create-invalidation \
     --distribution-id "${DISTRIBUTION_ID}" \
     --paths "/" "/index.html" \
     --query 'Invalidation.Id' \
