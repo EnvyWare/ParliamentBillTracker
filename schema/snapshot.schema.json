@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EnvyWare/uk-bill-pipeline/schema/snapshot.schema.json",
+  "title": "UK Bill Pipeline snapshot",
+  "description": "Self-contained normalised snapshot of every Bill in one configured UK Parliament session. Published to /data/current.json. Parliamentary information within an instance of this schema is licensed under the Open Parliament Licence v3.0 and is not covered by the repository MIT licence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "lastFullReconciliationAt",
+    "status",
+    "synthetic",
+    "source",
+    "counts",
+    "warnings",
+    "dataHash",
+    "bills"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "description": "Incremented only by a breaking change. Adding optional fields is compatible."
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/utcTimestamp",
+      "description": "Lambda-generated UTC instant. Excluded from dataHash."
+    },
+    "lastFullReconciliationAt": {
+      "oneOf": [{ "$ref": "#/$defs/utcTimestamp" }, { "type": "null" }],
+      "description": "UTC instant of the most recent complete detail and history reconciliation. Excluded from dataHash."
+    },
+    "status": {
+      "enum": ["healthy", "synthetic"],
+      "description": "healthy is used only for a fully validated live run. 'partial' is reserved for a future schema version."
+    },
+    "synthetic": {
+      "type": "boolean",
+      "description": "True for the checked-in local development fixture. The UI must label synthetic data as example data."
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "counts": { "$ref": "#/$defs/counts" },
+    "warnings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/snapshotWarning" },
+      "description": "Run-level warnings for maintainers and users. Never a reason on its own to withhold publication."
+    },
+    "dataHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Deterministic hash of stable source-derived content. Excludes generatedAt, lastFullReconciliationAt and itself."
+    },
+    "bills": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/bill" },
+      "description": "Sorted by case-folded title, then numeric Bill id."
+    }
+  },
+  "$defs": {
+    "utcTimestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$",
+      "description": "Lambda-generated UTC instant. Only generated timestamps are guaranteed UTC."
+    },
+    "calendarDate": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "Parliamentary calendar date. Not an instant and carries no offset."
+    },
+    "house": {
+      "enum": ["commons", "lords", "unassigned"]
+    },
+    "billStatus": {
+      "enum": ["active", "enacted", "withdrawn", "failed", "unknown"]
+    },
+    "pipelineNode": {
+      "enum": [
+        "commons_first_reading",
+        "commons_second_reading",
+        "commons_committee",
+        "commons_report",
+        "commons_third_reading",
+        "lords_first_reading",
+        "lords_second_reading",
+        "lords_committee",
+        "lords_report",
+        "lords_third_reading",
+        "ping_pong",
+        "royal_assent",
+        "special_procedure",
+        "withdrawn",
+        "failed",
+        "unknown"
+      ]
+    },
+    "mappingMode": {
+      "enum": ["direct", "previous_canonical", "terminal", "special", "unknown"]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "baseUrl", "sessionId", "sessionLabel", "attribution", "licenceUrl"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "baseUrl": { "type": "string", "minLength": 1 },
+        "sessionId": { "type": "integer" },
+        "sessionLabel": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 },
+        "licenceUrl": { "type": "string", "minLength": 1 }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "active",
+        "enacted",
+        "withdrawn",
+        "failed",
+        "unknown",
+        "specialOrUnclassified"
+      ],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "active": { "type": "integer", "minimum": 0 },
+        "enacted": { "type": "integer", "minimum": 0 },
+        "withdrawn": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 },
+        "specialOrUnclassified": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "snapshotWarning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "severity"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["info", "warning", "error"] },
+        "billIds": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "stageIds": {
+          "type": "array",
+          "items": { "type": "integer" }
+        }
+      }
+    },
+    "sitting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "date"],
+      "properties": {
+        "id": { "type": ["integer", "null"] },
+        "date": {
+          "oneOf": [{ "$ref": "#/$defs/calendarDate" }, { "type": "null" }],
+          "description": "Parliamentary calendar date derived without assuming a UTC offset."
+        },
+        "sourceDateTime": {
+          "type": ["string", "null"],
+          "description": "Verbatim source value. Retained without an appended offset."
+        }
+      }
+    },
+    "stageOccurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "billStageId",
+        "stageId",
+        "sessionId",
+        "label",
+        "abbreviation",
+        "house",
+        "sortOrder",
+        "sittings",
+        "nextSittingDate",
+        "detail"
+      ],
+      "properties": {
+        "billStageId": {
+          "type": ["integer", "null"],
+          "description": "Occurrence of a stage for one Bill (API currentStage.id)."
+        },
+        "stageId": {
+          "type": ["integer", "null"],
+          "description": "Reusable stage-reference identifier (API currentStage.stageId)."
+        },
+        "sessionId": { "type": ["integer", "null"] },
+        "label": { "type": "string" },
+        "abbreviation": { "type": ["string", "null"] },
+        "house": { "$ref": "#/$defs/house" },
+        "sortOrder": { "type": ["integer", "null"] },
+        "sittings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sitting" }
+        },
+        "nextSittingDate": {
+          "oneOf": [{ "$ref": "#/$defs/calendarDate" }, { "type": "null" }],
+          "description": "Earliest sitting date on or after the ingestion date, compared in Europe/London."
+        },
+        "detail": {
+          "type": ["string", "null"],
+          "description": "Actual source stage label retained when the normalised node differs from it."
+        }
+      }
+    },
+    "historyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "billStageId",
+        "stageId",
+        "sessionId",
+        "label",
+        "abbreviation",
+        "house",
+        "sortOrder",
+        "sittings",
+        "mappedNode",
+        "mappingMode"
+      ],
+      "properties": {
+        "billStageId": { "type": ["integer", "null"] },
+        "stageId": { "type": ["integer", "null"] },
+        "sessionId": { "type": ["integer", "null"] },
+        "label": { "type": "string" },
+        "abbreviation": { "type": ["string", "null"] },
+        "house": { "$ref": "#/$defs/house" },
+        "sortOrder": { "type": ["integer", "null"] },
+        "sittings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sitting" }
+        },
+        "mappedNode": {
+          "oneOf": [{ "$ref": "#/$defs/pipelineNode" }, { "type": "null" }]
+        },
+        "mappingMode": { "$ref": "#/$defs/mappingMode" }
+      }
+    },
+    "sponsor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["memberId", "name", "house", "party"],
+      "properties": {
+        "memberId": { "type": ["integer", "null"] },
+        "name": { "type": "string" },
+        "house": { "$ref": "#/$defs/house" },
+        "party": { "type": ["string", "null"] },
+        "organisation": { "type": ["string", "null"] }
+      },
+      "description": "Member photograph and contact URLs from the source API are deliberately discarded."
+    },
+    "bill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "formerTitle",
+        "summary",
+        "parliamentUrl",
+        "billType",
+        "originatingHouse",
+        "currentHouse",
+        "introducedSessionId",
+        "includedSessionIds",
+        "carriedOver",
+        "sourceLastUpdate",
+        "withdrawnSourceDate",
+        "status",
+        "pipelineNode",
+        "lastKnownPipelineNode",
+        "mappingMode",
+        "nonStandardRoute",
+        "stage",
+        "sponsors",
+        "history",
+        "pingPongExchangeNumber",
+        "detailsComplete",
+        "historyComplete",
+        "warnings"
+      ],
+      "properties": {
+        "id": { "type": "integer" },
+        "title": { "type": "string", "minLength": 1 },
+        "formerTitle": { "type": ["string", "null"] },
+        "summary": { "type": ["string", "null"] },
+        "parliamentUrl": { "type": "string", "minLength": 1 },
+        "billType": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "name", "category"],
+              "properties": {
+                "id": { "type": ["integer", "null"] },
+                "name": { "type": "string" },
+                "category": { "type": ["string", "null"] }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "originatingHouse": { "$ref": "#/$defs/house" },
+        "currentHouse": { "$ref": "#/$defs/house" },
+        "introducedSessionId": { "type": ["integer", "null"] },
+        "includedSessionIds": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "carriedOver": {
+          "type": "boolean",
+          "description": "True when the configured session is included but differs from introducedSessionId."
+        },
+        "sourceLastUpdate": {
+          "type": ["string", "null"],
+          "description": "Verbatim API lastUpdate. No offset is assumed or appended."
+        },
+        "withdrawnSourceDate": { "type": ["string", "null"] },
+        "status": { "$ref": "#/$defs/billStatus" },
+        "pipelineNode": { "$ref": "#/$defs/pipelineNode" },
+        "lastKnownPipelineNode": {
+          "oneOf": [{ "$ref": "#/$defs/pipelineNode" }, { "type": "null" }],
+          "description": "Retained for terminal Bills so the details view can explain where they stopped."
+        },
+        "mappingMode": { "$ref": "#/$defs/mappingMode" },
+        "nonStandardRoute": { "type": "boolean" },
+        "stage": {
+          "oneOf": [{ "$ref": "#/$defs/stageOccurrence" }, { "type": "null" }]
+        },
+        "sponsors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sponsor" }
+        },
+        "history": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/historyEntry" },
+          "description": "Sorted by API sortOrder, then occurrence id as a deterministic tie-breaker."
+        },
+        "pingPongExchangeNumber": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Count of consideration-of-amendments occurrences up to and including the current one. Null when complete history is unavailable."
+        },
+        "detailsComplete": { "type": "boolean" },
+        "historyComplete": { "type": "boolean" },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Machine-readable warning codes, for example terminal_flags_conflict."
+        }
+      }
+    }
+  }
+}
