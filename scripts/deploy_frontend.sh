@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+#
+# Upload the built frontend to the site bucket with correct cache metadata.
+#
+# The three object classes get different Cache-Control headers, and getting
+# them the wrong way round is the classic static-site bug:
+#
+#   fingerprinted assets  immutable for a year - the filename changes when the
+#                         content does, so it can never go stale
+#   index.html and roots  always revalidated - it is the file that points at
+#                         the fingerprinted assets
+#   data/current.json     written by the ingestion function, never from here
+#
+# This uploads the immutable assets first. If it were the other way round, a
+# browser could fetch a new index.html and then ask for an asset that had not
+# finished uploading.
+#
+# Usage: scripts/deploy_frontend.sh <site-bucket> [distribution-id]
+#
+# Requires the AWS CLI and credentials with write access to the site bucket.
+
+set -euo pipefail
+
+# Git Bash rewrites arguments that look like absolute paths, which turns a
+# CloudFront invalidation path of "/" into a Windows directory. Harmless
+# elsewhere; essential on Windows.
+export MSYS_NO_PATHCONV=1
+
+BUCKET="${1:-}"
+DISTRIBUTION_ID="${2:-}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DIST="${REPO_ROOT}/frontend/dist"
+
+if [ -z "${BUCKET}" ]; then
+  echo "Usage: scripts/deploy_frontend.sh <site-bucket> [distribution-id]" >&2
+  exit 2
+fi
+
+if [ ! -f "${DIST}/index.html" ]; then
+  echo "No build found at ${DIST}. Run 'make build-frontend' first." >&2
+  exit 1
+fi
+
+echo "Uploading fingerprinted assets to s3://${BUCKET}/assets/"
+aws s3 sync "${DIST}/assets" "s3://${BUCKET}/assets" \
+  --cache-control "public,max-age=31536000,immutable" \
+  --delete \
+  --no-progress
+
+echo "Uploading root documents to s3://${BUCKET}/"
+# --exclude assets/* leaves the immutable upload above untouched. The --delete
+# here is scoped to the site bucket, which is a different bucket from the one
+# holding the published snapshot: this command cannot reach the data.
+aws s3 sync "${DIST}" "s3://${BUCKET}" \
+  --cache-control "public,max-age=0,must-revalidate" \
+  --exclude "assets/*" \
+  --delete \
+  --no-progress
+
+if [ -n "${DISTRIBUTION_ID}" ]; then
+  # Only the documents that are revalidated anyway. Invalidating /* on every
+  # deployment would be wasteful and is never necessary here, because every
+  # other object is either fingerprinted or short-lived by policy.
+  echo "Invalidating / and /index.html on ${DISTRIBUTION_ID}"
+  aws cloudfront create-invalidation \
+    --distribution-id "${DISTRIBUTION_ID}" \
+    --paths "/" "/index.html" \
+    --query 'Invalidation.Id' \
+    --output text
+fi
+
+echo "Frontend deployed."
