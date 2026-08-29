@@ -1,0 +1,260 @@
+name: Deploy
+
+# Deployment is OPTIONAL. Everything in this repository runs, tests and builds
+# without an AWS account, and a fork that never sets AWS_DEPLOY_ROLE_ARN gets
+# the full quality gate below with the deployment steps skipped rather than
+# failed.
+#
+# There are no stored AWS keys. The deploy job federates through GitHub's OIDC
+# provider for short-lived credentials, and it is reachable only from a push to
+# main or a manual dispatch — never from `pull_request`, so a fork's pull
+# request cannot reach the role.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Apply the plan. Unticked, the run stops after planning.
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  # Never cancelled: a half-applied Terraform run is worse than a slow queue.
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  # The same workflow that guards a pull request, called rather than restated.
+  quality:
+    name: Quality
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  deploy:
+    name: Production
+    needs: quality
+    runs-on: ubuntu-latest
+
+    # Skipped, not failed, when the repository has no deployment configured.
+    # This is what makes the AWS half of the project genuinely optional.
+    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+
+    # A protected environment is where required reviewers and the branch
+    # restriction are enforced. Create it in the repository settings.
+    environment:
+      name: production
+      url: ${{ steps.outputs.outputs.site_url }}
+
+    permissions:
+      id-token: write # request the OIDC token
+      contents: read
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION || 'eu-west-2' }}
+      TF_IN_AUTOMATION: 'true'
+      TF_INPUT: '0'
+      TF_ROOT: infra/environments/prod
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: '1.16.0'
+          terraform_wrapper: false
+
+      # ---------------------------------------------------------------- build
+      # Terraform zips a directory that must already exist, so the artefacts
+      # are built before anything plans.
+
+      - name: Build the Lambda package
+        run: scripts/build_lambda.sh python3
+
+      - name: Build the frontend
+        run: |
+          npm ci
+          npm run build
+        working-directory: frontend
+
+      # ------------------------------------------------------------ configure
+      # Optional variables are written only when set. An unset repository
+      # variable is an empty string, and an empty string is not null: writing
+      # `domain_name = ""` would ask CloudFront for a blank alias rather than
+      # leaving the custom domain switched off.
+
+      - name: Compose the Terraform variables
+        env:
+          SESSION_ID: ${{ vars.PARLIAMENT_SESSION_ID }}
+          SESSION_LABEL: ${{ vars.PARLIAMENT_SESSION_LABEL }}
+          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
+          HOSTED_ZONE_ID: ${{ vars.HOSTED_ZONE_ID }}
+          ALARM_EMAIL: ${{ vars.ALARM_EMAIL }}
+          BUDGET_ALERT_EMAIL: ${{ vars.BUDGET_ALERT_EMAIL }}
+          MONTHLY_BUDGET_USD: ${{ vars.MONTHLY_BUDGET_USD }}
+          SCHEDULE_EXPRESSION: ${{ vars.SCHEDULE_EXPRESSION }}
+          INGESTION_ENABLED: ${{ vars.INGESTION_ENABLED }}
+          LAMBDA_RESERVED_CONCURRENCY: ${{ vars.LAMBDA_RESERVED_CONCURRENCY }}
+          ENABLE_CLOUDFRONT_ACCESS_LOGS: ${{ vars.ENABLE_CLOUDFRONT_ACCESS_LOGS }}
+          OWNER: ${{ vars.OWNER }}
+        run: |
+          set -euo pipefail
+          file="$TF_ROOT/ci.auto.tfvars"
+          : > "$file"
+
+          quoted() { [ -n "${2:-}" ] && printf '%s = "%s"\n' "$1" "$2" >> "$file"; return 0; }
+          bare()   { [ -n "${2:-}" ] && printf '%s = %s\n'   "$1" "$2" >> "$file"; return 0; }
+
+          quoted github_repository "$GITHUB_REPOSITORY"
+          quoted aws_region        "$AWS_REGION"
+          quoted owner             "$OWNER"
+
+          # Required. The Bills API exposes no dependable current-session
+          # lookup, so the session is explicit configuration.
+          bare   parliament_session_id    "$SESSION_ID"
+          quoted parliament_session_label "$SESSION_LABEL"
+
+          # All optional. Each unset variable leaves its feature switched off.
+          quoted domain_name         "$DOMAIN_NAME"
+          quoted hosted_zone_id      "$HOSTED_ZONE_ID"
+          quoted alarm_email         "$ALARM_EMAIL"
+          quoted budget_alert_email  "$BUDGET_ALERT_EMAIL"
+          quoted schedule_expression "$SCHEDULE_EXPRESSION"
+          bare   monthly_budget_usd  "$MONTHLY_BUDGET_USD"
+          bare   ingestion_enabled   "$INGESTION_ENABLED"
+          bare   enable_cloudfront_access_logs "$ENABLE_CLOUDFRONT_ACCESS_LOGS"
+
+          # "null" is a meaningful value here: it means "reserve nothing",
+          # which is what an account with the reduced concurrency quota of 10
+          # needs. bare() passes it through unquoted, so it stays null.
+          bare   lambda_reserved_concurrency "$LAMBDA_RESERVED_CONCURRENCY"
+
+          echo "::group::ci.auto.tfvars"
+          cat "$file"
+          echo "::endgroup::"
+
+      - name: Check the session is configured
+        run: |
+          if ! grep -q '^parliament_session_id' "$TF_ROOT/ci.auto.tfvars"; then
+            echo "::error::Set the PARLIAMENT_SESSION_ID repository variable. It must be updated at each State Opening; see docs/operations.md."
+            exit 1
+          fi
+
+      # ------------------------------------------------------------------ AWS
+
+      - name: Assume the deployment role
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c # v6.2.3
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: deploy-${{ github.run_id }}
+
+      # backend.tf is deliberately empty so no account identifier is committed,
+      # which means *every* backend setting has to be supplied here. encrypt
+      # and use_lockfile are not defaults: omitting them would silently init an
+      # unencrypted, unlocked backend, and two overlapping runs could then
+      # write over each other's state.
+      - name: Terraform init
+        run: |
+          terraform -chdir="$TF_ROOT" init \
+            -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" \
+            -backend-config="key=${{ vars.TF_STATE_KEY || 'uk-bill-pipeline/prod/terraform.tfstate' }}" \
+            -backend-config="region=${{ env.AWS_REGION }}" \
+            -backend-config="encrypt=true" \
+            -backend-config="use_lockfile=true"
+
+      - name: Terraform plan
+        run: terraform -chdir="$TF_ROOT" plan -out=tfplan
+
+      # Note the absence of a pipe. A pipeline reports its *last* command's
+      # exit status, so `terraform apply | tee` reports tee's success and a
+      # failed apply reads as a successful one. Where a pipe is unavoidable,
+      # `set -o pipefail` first.
+      - name: Terraform apply
+        if: github.event_name == 'push' || inputs.apply
+        run: terraform -chdir="$TF_ROOT" apply -auto-approve tfplan
+
+      - name: Read the outputs
+        id: outputs
+        if: github.event_name == 'push' || inputs.apply
+        run: |
+          set -euo pipefail
+          out() { terraform -chdir="$TF_ROOT" output -raw "$1"; }
+          {
+            echo "site_url=$(out site_url)"
+            echo "site_bucket=$(out site_bucket_name)"
+            echo "data_bucket=$(out data_bucket_name)"
+            echo "distribution_id=$(out cloudfront_distribution_id)"
+            echo "lambda_name=$(out ingestion_lambda_name)"
+          } >> "$GITHUB_OUTPUT"
+
+      # --------------------------------------------------------------- deploy
+
+      - name: Publish the frontend
+        if: steps.outputs.conclusion == 'success'
+        run: |
+          scripts/deploy_frontend.sh \
+            "${{ steps.outputs.outputs.site_bucket }}" \
+            "${{ steps.outputs.outputs.distribution_id }}"
+
+      # Only on a genuinely empty data bucket. Every later run is left to the
+      # schedule, so a deployment never costs Parliament 330 extra requests.
+      - name: First ingestion
+        if: steps.outputs.conclusion == 'success'
+        run: |
+          set -euo pipefail
+          if aws s3api head-object --bucket "${{ steps.outputs.outputs.data_bucket }}" \
+                                   --key data/current.json >/dev/null 2>&1; then
+            echo "A snapshot already exists; leaving it to the schedule."
+            exit 0
+          fi
+          echo "No snapshot yet. Running ingestion once."
+          aws lambda invoke \
+            --function-name "${{ steps.outputs.outputs.lambda_name }}" \
+            --cli-binary-format raw-in-base64-out --payload '{}' \
+            --cli-read-timeout 700 response.json
+          cat response.json
+          python -c "import json,sys; d=json.load(open('response.json')); sys.exit(0 if d.get('status') in ('published','unchanged') else 1)"
+
+      - name: Smoke test
+        if: steps.outputs.conclusion == 'success'
+        run: |
+          scripts/smoke_test.sh \
+            "${{ steps.outputs.outputs.site_url }}" \
+            "${{ steps.outputs.outputs.site_bucket }}" \
+            "${{ steps.outputs.outputs.data_bucket }}"
+
+      - name: Summary
+        if: steps.outputs.conclusion == 'success'
+        run: |
+          {
+            echo "### Deployed"
+            echo
+            echo "- ${{ steps.outputs.outputs.site_url }}"
+            echo "- Distribution \`${{ steps.outputs.outputs.distribution_id }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # ci.auto.tfvars holds no secrets, but it does name a real deployment,
+      # and a saved plan would.
+      - name: Clean up
+        if: always()
+        run: rm -f "$TF_ROOT/ci.auto.tfvars" "$TF_ROOT/tfplan" response.json
