@@ -89,12 +89,20 @@ test.describe('accessibility', () => {
   test('hides decorative connectors from assistive technology', async ({ page }) => {
     await page.goto('/');
     const exposedRules = await page.evaluate(
-      () =>
-        document.querySelectorAll(
-          '.transfer__rule:not([aria-hidden="true"]), .header__mark:not([aria-hidden="true"])',
-        ).length,
+      () => document.querySelectorAll('.transfer__rule:not([aria-hidden="true"])').length,
     );
     expect(exposedRules).toBe(0);
+  });
+
+  // The mark is deliberately NOT in the rule above. It used to be a decorative
+  // bar, but it is now the EnvyWare logo, and it carries the only mention of
+  // who publishes this in the heading. Hiding it would drop that name.
+  test('exposes the brand mark by name rather than hiding it', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('img', { name: 'EnvyWare' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveAccessibleName(
+      'EnvyWare UK Bill Pipeline',
+    );
   });
 
   test('announces result counts through a single polite live region', async ({ page }) => {
