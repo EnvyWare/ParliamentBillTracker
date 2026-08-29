@@ -97,7 +97,7 @@ def main() -> int:
         full_reconcile_after_days=7,
         schema_version=1,
         log_level="INFO",
-        repository_url="https://github.com/EnvyWare/uk-bill-pipeline",
+        repository_url="https://github.com/EnvyWare/ParliamentBillTracker",
     )
 
     http = HttpClient(transport=StdlibTransport(read_timeout=15.0), user_agent=config.user_agent)

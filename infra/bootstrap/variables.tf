@@ -34,7 +34,7 @@ variable "state_version_retention_days" {
 variable "github_repository" {
   description = "owner/repository, recorded in the Repository tag."
   type        = string
-  default     = "EnvyWare/uk-bill-pipeline"
+  default     = "EnvyWare/ParliamentBillTracker"
 }
 
 variable "owner" {

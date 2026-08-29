@@ -235,7 +235,7 @@ variable "cloudfront_access_log_bucket_domain_name" {
 variable "github_repository" {
   description = "TUNING. owner/repository. Used in tags and in the ingestion User-Agent, so Parliament can identify the client."
   type        = string
-  default     = "EnvyWare/uk-bill-pipeline"
+  default     = "EnvyWare/ParliamentBillTracker"
 
   validation {
     condition     = can(regex("^[^/]+/[^/]+$", var.github_repository))
