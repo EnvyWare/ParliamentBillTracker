@@ -33,8 +33,9 @@ locals {
   schedule_name = "${var.project_name}-${var.environment}-ingest-schedule"
 }
 
-data "aws_partition" "current" {}
-data "aws_region" "current" {}
+# Only the account id is needed, for the ARNs this module builds by hand.
+# aws_partition and aws_region data sources were declared here too and never
+# read: each one is a provider call on every plan, for a value nothing used.
 data "aws_caller_identity" "current" {}
 
 # ---------------------------------------------------------------------------
