@@ -38,6 +38,11 @@ DISCLAIMER = (
 #: File name patterns that must never be committed.
 FORBIDDEN_NAMES = [
     (re.compile(r"\.tfstate(\.backup)?$"), "Terraform state"),
+    # A saved plan is a zip that embeds a full tfstate snapshot alongside the
+    # config, so it leaks the same account ids and resource attributes that
+    # state does. It reached a public repository once by being on disk when
+    # `git add infra` ran.
+    (re.compile(r"^tfplan$|\.tfplan$"), "Terraform plan embeds state"),
     (re.compile(r"^terraform\.tfvars$"), "Terraform variables hold deployment specifics"),
     (re.compile(r"^backend\.hcl$"), "backend configuration names a real bucket"),
     (re.compile(r"^\.env$"), "environment file"),
@@ -54,6 +59,15 @@ SECRET_PATTERNS = [
     (re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"), "private key"),
     (re.compile(r"\bghp_[A-Za-z0-9]{36}\b"), "GitHub personal access token"),
 ]
+
+#: A 12-digit AWS account id, bounded so version numbers and timestamps do not
+#: match. Searched as bytes so that container formats are covered too.
+ACCOUNT_ID = re.compile(rb"(?<![0-9])([0-9]{12})(?![0-9])")
+
+#: Documentation placeholders. Examples and mocked provider tests need an
+#: account-shaped value, and a check that fires on those is a check that gets
+#: switched off. Any id made of a single repeated digit is treated the same way.
+PLACEHOLDER_ACCOUNTS = frozenset({"123456789012", "210987654321"})
 
 TEXT_SUFFIXES = {
     ".py",
@@ -221,6 +235,43 @@ def check_no_forbidden_files(files: list[Path]) -> list[Finding]:
     return findings
 
 
+def check_no_account_ids(files: list[Path]) -> list[Finding]:
+    """Look for a 12-digit AWS account id in any committed file.
+
+    Deliberately not limited to TEXT_SUFFIXES, because the one time this
+    leaked it leaked in a file no text scan would have opened.
+
+    Its limits are worth stating plainly. Raw bytes are searched, so this
+    catches an id in a file that merely is not a listed text type. It does
+    *not* see inside a compressed container: the leak that prompted this check
+    was a Terraform plan, a deflate zip, and the id is not present as ASCII in
+    the compressed bytes. Plan and state files are caught by name in
+    FORBIDDEN_NAMES instead, which is the defence that actually applies to
+    them. This function is the backstop for everything else.
+
+    The check is for any account id, not one specific value, so it keeps
+    working for whoever deploys this next.
+    """
+    findings = []
+    for path in files:
+        try:
+            blob = path.read_bytes()
+        except OSError:
+            continue
+        for match in ACCOUNT_ID.finditer(blob):
+            account = match.group(1).decode()
+            if account in PLACEHOLDER_ACCOUNTS or len(set(account)) == 1:
+                continue
+            findings.append(
+                Finding(
+                    str(path.relative_to(REPO_ROOT)),
+                    f"contains what looks like an AWS account id ({account})",
+                )
+            )
+            break
+    return findings
+
+
 def check_no_secrets(files: list[Path]) -> list[Finding]:
     findings = []
     for path in files:
@@ -247,6 +298,7 @@ def main() -> int:
         "in-application attribution": check_ui_attribution,
         "no state or credential files committed": lambda: check_no_forbidden_files(files),
         "no secrets in committed files": lambda: check_no_secrets(files),
+        "no AWS account ids in committed files": lambda: check_no_account_ids(files),
     }
 
     total = 0
