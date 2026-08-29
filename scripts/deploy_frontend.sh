@@ -47,6 +47,18 @@ aws s3 sync "${DIST}/assets" "s3://${BUCKET}/assets" \
   --delete \
   --no-progress
 
+# Fonts are versioned in the filename rather than fingerprinted by the build,
+# because index.html preloads them by a path it has to know in advance. A new
+# cut of a face is a new filename, so immutable is as safe here as it is for
+# assets/, and without it a preloaded font revalidates on every page load.
+if [ -d "${DIST}/fonts" ]; then
+  echo "Uploading fonts to s3://${BUCKET}/fonts/"
+  aws s3 sync "${DIST}/fonts" "s3://${BUCKET}/fonts" \
+    --cache-control "public,max-age=31536000,immutable" \
+    --delete \
+    --no-progress
+fi
+
 echo "Uploading root documents to s3://${BUCKET}/"
 # --exclude assets/* leaves the immutable upload above untouched. The --delete
 # here is scoped to the site bucket, which is a different bucket from the one
@@ -54,6 +66,7 @@ echo "Uploading root documents to s3://${BUCKET}/"
 aws s3 sync "${DIST}" "s3://${BUCKET}" \
   --cache-control "public,max-age=0,must-revalidate" \
   --exclude "assets/*" \
+  --exclude "fonts/*" \
   --delete \
   --no-progress
 
