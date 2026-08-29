@@ -1,0 +1,14 @@
+# Normalise to LF in the repository, whatever each contributor's autocrlf is
+# set to. Without this a Windows checkout can commit CRLF shell scripts, and
+# bash on the CI runner fails on the carriage return with errors that point
+# nowhere near the cause.
+* text=auto eol=lf
+
+# Never touched: a rewritten byte changes the meaning.
+*.png binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+
+# Executable on the runner regardless of the platform they were authored on.
+*.sh text eol=lf
