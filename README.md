@@ -134,8 +134,8 @@ NAT Gateway or database, and publication guards that cannot be disabled).
 [`ci.yml`](.github/workflows/ci.yml) runs on every pull request and needs no
 AWS credentials: ruff, mypy, pytest, ESLint, tsc, vitest, Playwright with axe,
 `terraform fmt`/`validate`, 34 Terraform policy tests against mocked
-providers, TFLint, a Trivy configuration scan, and checks that the licence
-attribution is still present.
+providers, TFLint, a Trivy configuration scan, a gitleaks scan of the whole
+commit history, and checks that the licence attribution is still present.
 
 [`deploy.yml`](.github/workflows/deploy.yml) calls that same workflow as its
 gate, then deploys — but only if `AWS_DEPLOY_ROLE_ARN` is set. It federates

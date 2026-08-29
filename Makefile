@@ -131,11 +131,21 @@ dev: ## Run Vite against the synthetic snapshot
 repo-check: ## Licence attribution and no state or credentials committed
 	$(VENV_PYTHON) scripts/check_repository.py
 
+# Scans committed history, not the working tree: a directory scan also walks
+# .venv and node_modules, whose installed packages carry sample keys.
+#
+# Skips rather than fails when gitleaks is absent, because installing it is a
+# per-machine job and a contributor should not be blocked by it. The skip is
+# loud on purpose, and CI always has the binary, so nothing merges unscanned.
+.PHONY: secret-scan
+secret-scan: ## Scan the git history for committed secrets (needs gitleaks)
+	@if command -v gitleaks >/dev/null 2>&1; then 		gitleaks git --config .gitleaks.toml --redact --verbose --exit-code 1 .; 	else 		echo "SKIPPED: gitleaks is not installed, so the history was NOT scanned."; 		echo "         Install it from https://github.com/gitleaks/gitleaks/releases"; 		echo "         or rely on CI, which always runs it."; 	fi
+
 # Deliberately the same set the CI workflow runs, minus the browser tests,
 # which need a Playwright download. `make check && make test-e2e` is the whole
 # gate. If these two lists ever drift, CI is no longer reproducible locally.
 .PHONY: check
-check: lint test fixtures-check docs-check repo-check tf-validate tf-test ## Every non-deployment quality check
+check: lint test fixtures-check docs-check repo-check secret-scan tf-validate tf-test ## Every non-deployment quality check
 
 .PHONY: clean
 clean: ## Remove build output and caches
