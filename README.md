@@ -1,7 +1,8 @@
 # UK Bill Pipeline
 
 Shows the complete route a Bill can take through the UK Parliament, and where
-every Bill in the current session actually sits on it.
+every Bill in the current session actually sits on it. Built and run by
+[EnvyWare](https://envyware.co.uk).
 
 > **Unofficial project.** This is an independent project and is not affiliated
 > with or endorsed by UK Parliament.
@@ -194,7 +195,14 @@ No Parliamentary imagery is used. The Crowned Portcullis, the Royal Arms, UK
 Parliament logos and wordmarks, and Parliamentary photography are **not**
 covered by the Open Parliament Licence, so none appears here. Member
 photograph URLs returned by the API are discarded during normalisation and are
-never published or proxied — the site renders no `<img>` element at all.
+never published or proxied. The only mark on the page is EnvyWare's own, drawn
+inline as SVG, so the site still renders no `<img>` element at all and loads no
+remote asset of any kind.
+
+The EnvyWare name and marks, and the two bundled typefaces, are each excluded
+from the MIT grant for their own reasons - see
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). If you fork this, the file
+tells you exactly which files to replace.
 
 The concept was inspired by TLDR News's
 [How Bills Get Passed in Parliament (and why it takes so long)](https://www.youtube.com/watch?v=pLSE3O5OaBo).
