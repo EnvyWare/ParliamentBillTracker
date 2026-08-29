@@ -2,7 +2,11 @@
 name = "bill-pipeline"
 version = "1.0.0"
 description = "Scheduled ingestion Lambda that normalises UK Parliament Bills API data into a static snapshot."
-readme = "../README.md"
+
+# No readme field. It pointed at ../README.md, and setuptools refuses to read
+# anything outside the project directory, so `pip install -e backend[dev]`
+# failed outright with DistutilsOptionError. This package is a Lambda payload
+# and is never published, so the metadata is not worth a duplicate README.
 requires-python = ">=3.13"
 license = { text = "MIT" }
 authors = [{ name = "Daniel Norris" }]
