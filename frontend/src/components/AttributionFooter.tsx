@@ -3,7 +3,7 @@ import type { Snapshot } from '../model/types';
 const OPEN_PARLIAMENT_LICENCE_URL =
   'https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/';
 
-const REPOSITORY_URL = 'https://github.com/EnvyWare/uk-bill-pipeline';
+const REPOSITORY_URL = 'https://github.com/EnvyWare/ParliamentBillTracker';
 const ENVYWARE_URL = 'https://envyware.co.uk';
 
 interface AttributionFooterProps {

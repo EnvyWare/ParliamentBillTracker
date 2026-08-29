@@ -48,7 +48,7 @@ def config() -> Config:
         full_reconcile_after_days=7,
         schema_version=1,
         log_level="INFO",
-        repository_url="https://github.com/EnvyWare/uk-bill-pipeline",
+        repository_url="https://github.com/EnvyWare/ParliamentBillTracker",
     )
 
 

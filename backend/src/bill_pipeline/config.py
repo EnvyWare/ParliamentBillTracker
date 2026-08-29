@@ -131,7 +131,7 @@ def load_config(environ: dict[str, str] | None = None) -> Config:
         full_reconcile_after_days=_positive_int("FULL_RECONCILE_AFTER_DAYS", "7"),
         schema_version=_positive_int("SCHEMA_VERSION", str(SCHEMA_VERSION)),
         log_level=_optional("LOG_LEVEL", "INFO").upper(),
-        repository_url=_optional("REPOSITORY_URL", "https://github.com/EnvyWare/uk-bill-pipeline"),
+        repository_url=_optional("REPOSITORY_URL", "https://github.com/EnvyWare/ParliamentBillTracker"),
     )
 
 
