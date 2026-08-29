@@ -4,6 +4,7 @@ const OPEN_PARLIAMENT_LICENCE_URL =
   'https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/';
 
 const REPOSITORY_URL = 'https://github.com/EnvyWare/uk-bill-pipeline';
+const ENVYWARE_URL = 'https://envyware.co.uk';
 
 interface AttributionFooterProps {
   readonly snapshot: Snapshot | null;
@@ -44,6 +45,13 @@ export function AttributionFooter({ snapshot }: AttributionFooterProps): React.J
           <p>
             This is an independent, unofficial project and is not affiliated with or endorsed by UK
             Parliament.
+          </p>
+          <p>
+            It is built and run by{' '}
+            <a href={ENVYWARE_URL} rel="noopener noreferrer" target="_blank">
+              EnvyWare
+            </a>
+            , who wanted to see the whole process on one page and could not find it anywhere.
           </p>
           <p>
             The stage a Bill is shown at is derived from published stage identifiers. Some Bills
