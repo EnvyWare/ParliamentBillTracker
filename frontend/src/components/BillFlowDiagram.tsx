@@ -167,8 +167,17 @@ export function BillFlowDiagram({ bill, journey }: BillFlowDiagramProps): React.
               height={lane.height}
               rx="14"
             />
+            {/* Either side of the spine, never across it. See FlowLane.label. */}
             <text className="flow__lane-label" x={lane.x + 14} y={lane.y + 20}>
-              {lane.label}
+              {lane.houseName}
+            </text>
+            <text
+              className="flow__lane-position"
+              x={lane.x + lane.width - 14}
+              y={lane.y + 20}
+              textAnchor="end"
+            >
+              {lane.position}
             </text>
           </g>
         ))}

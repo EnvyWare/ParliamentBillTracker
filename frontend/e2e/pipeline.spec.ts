@@ -287,20 +287,46 @@ test.describe('the Bill journey page', () => {
     await expect(page.locator('.flow__node--current')).toHaveCount(1);
   });
 
+  // The House name and the lane's position are drawn as two elements, one
+  // either side of the spine, so that neither can collide with it. Both halves
+  // are asserted here: the pairing is the thing that carries the meaning.
   test('names the Houses the Bill actually used', async ({ page }) => {
     await page.goto('/?bill=9011&view=journey');
-    await expect(page.locator('.flow__lane-label').first()).toHaveText(
-      'First House · House of Commons',
-    );
-    await expect(page.locator('.flow__lane-label').nth(1)).toHaveText(
-      'Second House · House of Lords',
-    );
+    await expect(page.locator('.flow__lane-label').first()).toHaveText('House of Commons');
+    await expect(page.locator('.flow__lane-position').first()).toHaveText('First House');
+    await expect(page.locator('.flow__lane-label').nth(1)).toHaveText('House of Lords');
+    await expect(page.locator('.flow__lane-position').nth(1)).toHaveText('Second House');
 
     // A Lords-first Bill reads the other way round.
     await page.goto('/?bill=9024&view=journey');
-    await expect(page.locator('.flow__lane-label').first()).toHaveText(
-      'First House · House of Lords',
-    );
+    await expect(page.locator('.flow__lane-label').first()).toHaveText('House of Lords');
+    await expect(page.locator('.flow__lane-position').first()).toHaveText('First House');
+  });
+
+  // Neither half may cross the spine that runs down the middle of the lane.
+  // This is what regressed when the body font changed to Inter: the single
+  // combined label was 206px wide with only 136px of room before the spine.
+  test('keeps the lane labels clear of the spine', async ({ page }) => {
+    await page.goto('/?bill=9011&view=journey');
+    // The snapshot is fetched, so the diagram is not in the first paint.
+    await page.locator('.flow__lane-position').nth(1).waitFor();
+
+    const gaps = await page.evaluate(() => {
+      const SPINE = 400;
+      const box = (selector: string, index: number) => {
+        const element = document.querySelectorAll(selector)[index] as SVGGraphicsElement;
+        return element.getBBox();
+      };
+      return [0, 1].map((lane) => ({
+        beforeSpine:
+          SPINE - (box('.flow__lane-label', lane).x + box('.flow__lane-label', lane).width),
+        afterSpine: box('.flow__lane-position', lane).x - SPINE,
+      }));
+    });
+    for (const gap of gaps) {
+      expect(gap.beforeSpine).toBeGreaterThan(0);
+      expect(gap.afterSpine).toBeGreaterThan(0);
+    }
   });
 
   test('shows a defeated Bill leaving the route', async ({ page }) => {

@@ -55,7 +55,20 @@ export interface FlowLane {
   readonly y: number;
   readonly width: number;
   readonly height: number;
+  /**
+   * The whole label, for the text alternative and for tests.
+   *
+   * It is deliberately not what gets drawn. The spine runs down the middle of
+   * the lane, so a single label anchored at the lane's left edge collides with
+   * it as soon as the House name is long or the body font is wide. The two
+   * halves below are drawn either side of the spine instead, which cannot
+   * collide with it whatever the font does.
+   */
   readonly label: string;
+  /** Drawn at the lane's top left, ending well before the spine. */
+  readonly houseName: string;
+  /** Drawn at the lane's top right, starting well after the spine. */
+  readonly position: string;
   readonly house: House;
 }
 
@@ -301,6 +314,8 @@ export function buildFlowLayout(
       width: 300,
       height: 348,
       label: `First House · ${firstName}`,
+      houseName: firstName,
+      position: 'First House',
       house: firstHouse,
     },
     {
@@ -310,6 +325,8 @@ export function buildFlowLayout(
       width: 300,
       height: 348,
       label: `Second House · ${secondName}`,
+      houseName: secondName,
+      position: 'Second House',
       house: secondHouse,
     },
   ];
