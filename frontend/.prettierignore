@@ -1,0 +1,5 @@
+dist
+coverage
+public/data
+playwright-report
+test-results

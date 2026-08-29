@@ -1,0 +1,93 @@
+/*
+ * Original visual identity for UK Bill Pipeline.
+ *
+ * Neutral navy and slate foundations with restrained teal and amber accents.
+ * Nothing here imitates the Crowned Portcullis, the Royal Arms, any UK
+ * Parliament logo or wordmark, or the colour system of the video that
+ * inspired the project.
+ *
+ * Colour is never the only carrier of meaning: House, status and warnings all
+ * have text labels or shapes alongside their colour. Contrast targets are
+ * WCAG 2.2 AA - at least 4.5:1 for normal text and 3:1 for meaningful
+ * graphics and UI boundaries.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --surface-page: #f4f6f9;
+  --surface-raised: #ffffff;
+  --surface-sunken: #eaeef4;
+  --surface-inverse: #12203a;
+
+  /* Ink. All measured against --surface-raised. */
+  --ink-strong: #101d33; /* 15.9:1 */
+  --ink: #1e2c46; /* 12.1:1 */
+  --ink-muted: #4c5871; /* 7.1:1 */
+  --ink-subtle: #5c6880; /* 5.5:1 */
+  --ink-inverse: #f4f6f9;
+
+  /* Lines */
+  --line: #d3dae5;
+  --line-strong: #9aa6ba; /* 3.1:1 against white, for meaningful boundaries */
+
+  /* Accents */
+  --accent: #0b6b6d; /* teal, 5.5:1 on white */
+  --accent-strong: #075052;
+  --accent-wash: #e4f2f2;
+  --amber: #8a5200; /* 6.0:1 on white */
+  --amber-wash: #fbf0dd;
+
+  /* House identity. Always paired with a visible text label. */
+  --commons: #0b6b6d;
+  --commons-wash: #e4f2f2;
+  --lords: #6a4595; /* 6.2:1 on white */
+  --lords-wash: #efe9f7;
+  --shared: #4c5871;
+  --shared-wash: #e9ecf3;
+
+  /* Status */
+  --status-warning: #8a5200;
+  --status-warning-wash: #fbf0dd;
+  --status-error: #98202e; /* 7.0:1 on white */
+  --status-error-wash: #fbe9eb;
+  --status-ok: #1f6b3f;
+  --status-ok-wash: #e4f2ea;
+
+  --focus-ring: #0b3d91;
+
+  /* Type. System stack only: no remote font is ever requested. */
+  --font-body:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  --shadow-card: 0 1px 2px rgb(16 29 51 / 8%);
+  --shadow-sheet: -8px 0 32px rgb(16 29 51 / 18%);
+
+  /* Touch targets stay at least 44x44 CSS pixels on touch layouts. */
+  --touch-target: 44px;
+
+  --max-width: 1600px;
+}

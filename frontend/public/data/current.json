@@ -1,0 +1,2972 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-29T12:00:00Z",
+  "lastFullReconciliationAt": "2026-08-29T12:00:00Z",
+  "status": "synthetic",
+  "synthetic": true,
+  "source": {
+    "name": "UK Parliament Bills API",
+    "baseUrl": "https://bills-api.parliament.uk/api/v1",
+    "sessionId": 40,
+    "sessionLabel": "2026-27",
+    "attribution": "Contains Parliamentary information licensed under the Open Parliament Licence v3.0.",
+    "licenceUrl": "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/"
+  },
+  "counts": {
+    "total": 24,
+    "active": 20,
+    "enacted": 2,
+    "withdrawn": 1,
+    "failed": 1,
+    "unknown": 0,
+    "specialOrUnclassified": 3
+  },
+  "warnings": [
+    {
+      "code": "synthetic_example_data",
+      "message": "This is example data generated for local development. It does not describe any real Bill before the UK Parliament.",
+      "severity": "info"
+    },
+    {
+      "code": "unknown_stage_id",
+      "message": "Some Bills are at a stage this build does not recognise and are shown as unclassified rather than being placed by guesswork.",
+      "severity": "info",
+      "billIds": [
+        9019
+      ]
+    }
+  ],
+  "dataHash": "sha256:3ff1926409b876eecd0d7d23b8658870b8f4ccbf76c267ad290a421d6f93e37f",
+  "bills": [
+    {
+      "id": 9012,
+      "title": "Arbitration Bill",
+      "formerTitle": null,
+      "summary": "A Bill to consolidate the law relating to arbitration.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9012",
+      "billType": {
+        "id": 2,
+        "name": "Private Members' Bill (Starting in the House of Lords)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-19T17:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_first_reading",
+      "lastKnownPipelineNode": "lords_first_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9012000,
+        "stageId": 1,
+        "sessionId": 40,
+        "label": "1st reading",
+        "abbreviation": "1R",
+        "house": "lords",
+        "sortOrder": 1,
+        "sittings": [
+          {
+            "id": 901201,
+            "date": "2026-08-19",
+            "sourceDateTime": "2026-08-19T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1013,
+          "name": "Lord Example of Westhaven",
+          "house": "lords",
+          "party": "Crossbench",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9012000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [
+            {
+              "id": 901201,
+              "date": "2026-08-19",
+              "sourceDateTime": "2026-08-19T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9010,
+      "title": "Border Security Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about border security.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9010",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-23T12:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_third_reading",
+      "lastKnownPipelineNode": "lords_third_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9010009,
+        "stageId": 5,
+        "sessionId": 40,
+        "label": "3rd reading",
+        "abbreviation": "3R",
+        "house": "lords",
+        "sortOrder": 10,
+        "sittings": [
+          {
+            "id": 901001,
+            "date": "2026-09-18",
+            "sourceDateTime": "2026-09-18T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-18",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1011,
+          "name": "Yvette Hallam",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9010000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010007,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 8,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010008,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 9,
+          "sittings": [],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9010009,
+          "stageId": 5,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "lords",
+          "sortOrder": 10,
+          "sittings": [
+            {
+              "id": 901001,
+              "date": "2026-09-18",
+              "sourceDateTime": "2026-09-18T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_third_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9016,
+      "title": "Charities Regulation Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about the regulation of charities.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9016",
+      "billType": {
+        "id": 2,
+        "name": "Private Members' Bill (Starting in the House of Lords)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-21T16:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_second_reading",
+      "lastKnownPipelineNode": "commons_second_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9016006,
+        "stageId": 7,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "commons",
+        "sortOrder": 7,
+        "sittings": [
+          {
+            "id": 901601,
+            "date": "2026-09-19",
+            "sourceDateTime": "2026-09-19T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-19",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1017,
+          "name": "Baroness Example of Thurloe",
+          "house": "lords",
+          "party": "Example Party A",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9016000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016001,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016002,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016003,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016004,
+          "stageId": 5,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "lords",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "lords_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016005,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9016006,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 7,
+          "sittings": [
+            {
+              "id": 901601,
+              "date": "2026-09-19",
+              "sourceDateTime": "2026-09-19T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9001,
+      "title": "Coastal Erosion (Monitoring) Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about the monitoring of coastal erosion.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9001",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-18T14:02:11.7654321",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_first_reading",
+      "lastKnownPipelineNode": "commons_first_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9001000,
+        "stageId": 6,
+        "sessionId": 40,
+        "label": "1st reading",
+        "abbreviation": "1R",
+        "house": "commons",
+        "sortOrder": 1,
+        "sittings": [
+          {
+            "id": 900101,
+            "date": "2026-08-18",
+            "sourceDateTime": "2026-08-18T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1001,
+          "name": "Rowan Ashfield",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9001000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [
+            {
+              "id": 900101,
+              "date": "2026-08-18",
+              "sourceDateTime": "2026-08-18T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9002,
+      "title": "Community Energy Bill",
+      "formerTitle": null,
+      "summary": "A Bill to support community-owned energy generation.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9002",
+      "billType": {
+        "id": 7,
+        "name": "Private Members' Bill (Ballot Bill)",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-21T10:30:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_second_reading",
+      "lastKnownPipelineNode": "commons_second_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9002001,
+        "stageId": 7,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "commons",
+        "sortOrder": 2,
+        "sittings": [
+          {
+            "id": 900201,
+            "date": "2026-09-11",
+            "sourceDateTime": "2026-09-11T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-11",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1002,
+          "name": "Imogen Blackwood",
+          "house": "commons",
+          "party": "Example Party B",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9002000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9002001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [
+            {
+              "id": 900201,
+              "date": "2026-09-11",
+              "sourceDateTime": "2026-09-11T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9011,
+      "title": "Data Protection Bill",
+      "formerTitle": null,
+      "summary": "Both Houses are exchanging amendments on the final wording.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9011",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-29T07:30:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "ping_pong",
+      "lastKnownPipelineNode": "ping_pong",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9011012,
+        "stageId": 42,
+        "sessionId": 40,
+        "label": "Consideration of Lords message",
+        "abbreviation": "CLM",
+        "house": "commons",
+        "sortOrder": 13,
+        "sittings": [
+          {
+            "id": 901101,
+            "date": "2026-09-01",
+            "sourceDateTime": "2026-09-01T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-01",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1012,
+          "name": "Chi Ravensworth",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9011000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011007,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 8,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011008,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 9,
+          "sittings": [],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011009,
+          "stageId": 5,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "lords",
+          "sortOrder": 10,
+          "sittings": [],
+          "mappedNode": "lords_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011010,
+          "stageId": 12,
+          "sessionId": 40,
+          "label": "Consideration of Lords amendments",
+          "abbreviation": "CLA",
+          "house": "commons",
+          "sortOrder": 11,
+          "sittings": [],
+          "mappedNode": "ping_pong",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011011,
+          "stageId": 13,
+          "sessionId": 40,
+          "label": "Consideration of Commons amendments and / or reasons",
+          "abbreviation": "CCA",
+          "house": "lords",
+          "sortOrder": 12,
+          "sittings": [],
+          "mappedNode": "ping_pong",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9011012,
+          "stageId": 42,
+          "sessionId": 40,
+          "label": "Consideration of Lords message",
+          "abbreviation": "CLM",
+          "house": "commons",
+          "sortOrder": 13,
+          "sittings": [
+            {
+              "id": 901101,
+              "date": "2026-09-01",
+              "sourceDateTime": "2026-09-01T00:00:00"
+            }
+          ],
+          "mappedNode": "ping_pong",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": 3,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9003,
+      "title": "Digital Identity Bill",
+      "formerTitle": null,
+      "summary": "Establishes a framework for voluntary digital identity credentials.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9003",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-27T16:45:33.2222222",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_committee",
+      "lastKnownPipelineNode": "commons_committee",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9003002,
+        "stageId": 8,
+        "sessionId": 40,
+        "label": "Committee stage",
+        "abbreviation": "CS",
+        "house": "commons",
+        "sortOrder": 3,
+        "sittings": [
+          {
+            "id": 900301,
+            "date": "2026-09-02",
+            "sourceDateTime": "2026-09-02T00:00:00"
+          },
+          {
+            "id": 900302,
+            "date": "2026-09-03",
+            "sourceDateTime": "2026-09-03T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-02",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1003,
+          "name": "Nadia Okonjo",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        },
+        {
+          "memberId": 1004,
+          "name": "Peter Vance",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9003000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9003001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9003002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [
+            {
+              "id": 900301,
+              "date": "2026-09-02",
+              "sourceDateTime": "2026-09-02T00:00:00"
+            },
+            {
+              "id": 900302,
+              "date": "2026-09-03",
+              "sourceDateTime": "2026-09-03T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9008,
+      "title": "Employment Rights Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about employment rights and enforcement.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9008",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-28T08:05:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_committee",
+      "lastKnownPipelineNode": "lords_committee",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9008007,
+        "stageId": 3,
+        "sessionId": 40,
+        "label": "Committee stage",
+        "abbreviation": "CS",
+        "house": "lords",
+        "sortOrder": 8,
+        "sittings": [
+          {
+            "id": 900801,
+            "date": "2026-09-04",
+            "sourceDateTime": "2026-09-04T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-04",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1009,
+          "name": "Angela Thorne",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9008000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9008007,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 8,
+          "sittings": [
+            {
+              "id": 900801,
+              "date": "2026-09-04",
+              "sourceDateTime": "2026-09-04T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9019,
+      "title": "Example Procedure Bill",
+      "formerTitle": null,
+      "summary": "A Bill used to demonstrate an unrecognised stage id.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9019",
+      "billType": {
+        "id": 4,
+        "name": "Hybrid Bill",
+        "category": "Hybrid"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-13T10:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "unknown",
+      "lastKnownPipelineNode": "commons_first_reading",
+      "mappingMode": "unknown",
+      "nonStandardRoute": true,
+      "stage": {
+        "billStageId": 9019001,
+        "stageId": 9999,
+        "sessionId": 40,
+        "label": "A stage introduced after this build",
+        "abbreviation": "NEW",
+        "house": "commons",
+        "sortOrder": 2,
+        "sittings": [
+          {
+            "id": 901901,
+            "date": "2026-09-20",
+            "sourceDateTime": "2026-09-20T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-20",
+        "detail": "A stage introduced after this build"
+      },
+      "sponsors": [],
+      "history": [
+        {
+          "billStageId": 9019000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9019001,
+          "stageId": 9999,
+          "sessionId": 40,
+          "label": "A stage introduced after this build",
+          "abbreviation": "NEW",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [
+            {
+              "id": 901901,
+              "date": "2026-09-20",
+              "sourceDateTime": "2026-09-20T00:00:00"
+            }
+          ],
+          "mappedNode": null,
+          "mappingMode": "unknown"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": [
+        "unknown_stage_id",
+        "non_standard_route"
+      ]
+    },
+    {
+      "id": 9021,
+      "title": "Finance Act 2026",
+      "formerTitle": null,
+      "summary": "An Act to grant certain duties and to amend the law relating to the public revenue.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9021",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-07-30T15:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "enacted",
+      "pipelineNode": "royal_assent",
+      "lastKnownPipelineNode": "royal_assent",
+      "mappingMode": "terminal",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9021010,
+        "stageId": 11,
+        "sessionId": 40,
+        "label": "Royal Assent",
+        "abbreviation": "RA",
+        "house": "unassigned",
+        "sortOrder": 11,
+        "sittings": [
+          {
+            "id": 902101,
+            "date": "2026-07-30",
+            "sourceDateTime": "2026-07-30T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": "Royal Assent"
+      },
+      "sponsors": [
+        {
+          "memberId": 1019,
+          "name": "Rachel Enderby",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9021000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021007,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 8,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021008,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 9,
+          "sittings": [],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021009,
+          "stageId": 5,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "lords",
+          "sortOrder": 10,
+          "sittings": [],
+          "mappedNode": "lords_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9021010,
+          "stageId": 11,
+          "sessionId": 40,
+          "label": "Royal Assent",
+          "abbreviation": "RA",
+          "house": "unassigned",
+          "sortOrder": 11,
+          "sittings": [
+            {
+              "id": 902101,
+              "date": "2026-07-30",
+              "sourceDateTime": "2026-07-30T00:00:00"
+            }
+          ],
+          "mappedNode": "royal_assent",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9024,
+      "title": "Fixed Odds Betting Bill",
+      "formerTitle": null,
+      "summary": "A Bill to restrict fixed odds betting terminals.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9024",
+      "billType": {
+        "id": 7,
+        "name": "Private Members' Bill (Ballot Bill)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-04-17T19:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "failed",
+      "pipelineNode": "failed",
+      "lastKnownPipelineNode": "lords_second_reading",
+      "mappingMode": "terminal",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9024001,
+        "stageId": 2,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "lords",
+        "sortOrder": 2,
+        "sittings": [
+          {
+            "id": 902401,
+            "date": "2026-04-17",
+            "sourceDateTime": "2026-04-17T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": "2nd reading"
+      },
+      "sponsors": [
+        {
+          "memberId": 1022,
+          "name": "Lord Example of Brambleton",
+          "house": "lords",
+          "party": "Crossbench",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9024000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9024001,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 2,
+          "sittings": [
+            {
+              "id": 902401,
+              "date": "2026-04-17",
+              "sourceDateTime": "2026-04-17T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9004,
+      "title": "Health Standards Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about health and social care standards.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9004",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-28T18:42:57.9656298",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_report",
+      "lastKnownPipelineNode": "commons_report",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9004003,
+        "stageId": 9,
+        "sessionId": 40,
+        "label": "Report stage",
+        "abbreviation": "RS",
+        "house": "commons",
+        "sortOrder": 4,
+        "sittings": [
+          {
+            "id": 900401,
+            "date": "2026-09-07",
+            "sourceDateTime": "2026-09-07T00:00:00"
+          },
+          {
+            "id": 900402,
+            "date": "2026-09-08",
+            "sourceDateTime": "2026-09-08T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-07",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1005,
+          "name": "Wesley Marchant",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9004000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9004001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9004002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9004003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [
+            {
+              "id": 900401,
+              "date": "2026-09-07",
+              "sourceDateTime": "2026-09-07T00:00:00"
+            },
+            {
+              "id": 900402,
+              "date": "2026-09-08",
+              "sourceDateTime": "2026-09-08T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9013,
+      "title": "Heritage Railways Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about heritage railway operations.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9013",
+      "billType": {
+        "id": 2,
+        "name": "Private Members' Bill (Starting in the House of Lords)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-20T11:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_second_reading",
+      "lastKnownPipelineNode": "lords_second_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9013001,
+        "stageId": 2,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "lords",
+        "sortOrder": 2,
+        "sittings": [
+          {
+            "id": 901301,
+            "date": "2026-09-12",
+            "sourceDateTime": "2026-09-12T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-12",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1014,
+          "name": "Baroness Example of Marlow",
+          "house": "lords",
+          "party": "Example Party B",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9013000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9013001,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 2,
+          "sittings": [
+            {
+              "id": 901301,
+              "date": "2026-09-12",
+              "sourceDateTime": "2026-09-12T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9017,
+      "title": "Infrastructure (Delivery) Bill",
+      "formerTitle": "National Infrastructure Bill",
+      "summary": "A Bill to make provision about the delivery of national infrastructure.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9017",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 39,
+      "includedSessionIds": [
+        39,
+        40
+      ],
+      "carriedOver": true,
+      "sourceLastUpdate": "2026-08-15T09:45:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_committee",
+      "lastKnownPipelineNode": "commons_committee",
+      "mappingMode": "previous_canonical",
+      "nonStandardRoute": true,
+      "stage": {
+        "billStageId": 9017003,
+        "stageId": 18,
+        "sessionId": 40,
+        "label": "Carry-over motion",
+        "abbreviation": "CO",
+        "house": "commons",
+        "sortOrder": 4,
+        "sittings": [
+          {
+            "id": 901701,
+            "date": "2026-08-15",
+            "sourceDateTime": "2026-08-15T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": "Carry-over motion"
+      },
+      "sponsors": [
+        {
+          "memberId": 1018,
+          "name": "Louise Kettering",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9017000,
+          "stageId": 6,
+          "sessionId": 39,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9017001,
+          "stageId": 7,
+          "sessionId": 39,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9017002,
+          "stageId": 8,
+          "sessionId": 39,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9017003,
+          "stageId": 18,
+          "sessionId": 40,
+          "label": "Carry-over motion",
+          "abbreviation": "CO",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [
+            {
+              "id": 901701,
+              "date": "2026-08-15",
+              "sourceDateTime": "2026-08-15T00:00:00"
+            }
+          ],
+          "mappedNode": null,
+          "mappingMode": "special"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": [
+        "non_standard_route"
+      ]
+    },
+    {
+      "id": 9023,
+      "title": "Local Referendums Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision for local referendums.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9023",
+      "billType": {
+        "id": 7,
+        "name": "Private Members' Bill (Ballot Bill)",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-06-02T12:00:00.0000000",
+      "withdrawnSourceDate": "2026-06-02T00:00:00",
+      "status": "withdrawn",
+      "pipelineNode": "withdrawn",
+      "lastKnownPipelineNode": "commons_second_reading",
+      "mappingMode": "terminal",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9023001,
+        "stageId": 7,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "commons",
+        "sortOrder": 2,
+        "sittings": [
+          {
+            "id": 902301,
+            "date": "2026-05-22",
+            "sourceDateTime": "2026-05-22T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": "2nd reading"
+      },
+      "sponsors": [
+        {
+          "memberId": 1021,
+          "name": "Priya Nandakumar",
+          "house": "commons",
+          "party": "Example Party B",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9023000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9023001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [
+            {
+              "id": 902301,
+              "date": "2026-05-22",
+              "sourceDateTime": "2026-05-22T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9014,
+      "title": "Museums and Galleries Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about the governance of museums and galleries.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9014",
+      "billType": {
+        "id": 2,
+        "name": "Private Members' Bill (Starting in the House of Lords)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-26T14:30:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_committee",
+      "lastKnownPipelineNode": "lords_committee",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9014002,
+        "stageId": 3,
+        "sessionId": 40,
+        "label": "Committee stage",
+        "abbreviation": "CS",
+        "house": "lords",
+        "sortOrder": 3,
+        "sittings": [
+          {
+            "id": 901401,
+            "date": "2026-09-05",
+            "sourceDateTime": "2026-09-05T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-05",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1015,
+          "name": "Lord Example of Aldergate",
+          "house": "lords",
+          "party": "Crossbench",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9014000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9014001,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9014002,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 3,
+          "sittings": [
+            {
+              "id": 901401,
+              "date": "2026-09-05",
+              "sourceDateTime": "2026-09-05T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9009,
+      "title": "Planning Reform Bill",
+      "formerTitle": null,
+      "summary": "A Bill to reform the planning system.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9009",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-22T15:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_report",
+      "lastKnownPipelineNode": "lords_report",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9009008,
+        "stageId": 4,
+        "sessionId": 40,
+        "label": "Report stage",
+        "abbreviation": "RS",
+        "house": "lords",
+        "sortOrder": 9,
+        "sittings": [
+          {
+            "id": 900901,
+            "date": "2026-09-16",
+            "sourceDateTime": "2026-09-16T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-16",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1010,
+          "name": "Matthew Pennington",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9009000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009007,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 8,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9009008,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 9,
+          "sittings": [
+            {
+              "id": 900901,
+              "date": "2026-09-16",
+              "sourceDateTime": "2026-09-16T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9005,
+      "title": "Rural Transport Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about rural transport funding.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9005",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-26T11:11:11.1111111",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_third_reading",
+      "lastKnownPipelineNode": "commons_third_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9005004,
+        "stageId": 10,
+        "sessionId": 40,
+        "label": "3rd reading",
+        "abbreviation": "3R",
+        "house": "commons",
+        "sortOrder": 5,
+        "sittings": [
+          {
+            "id": 900501,
+            "date": "2026-09-15",
+            "sourceDateTime": "2026-09-15T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-15",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1006,
+          "name": "Adaeze Fairbairn",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9005000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9005001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9005002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9005003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9005004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [
+            {
+              "id": 900501,
+              "date": "2026-09-15",
+              "sourceDateTime": "2026-09-15T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9006,
+      "title": "Schools Funding Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about the funding of schools.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9006",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-25T09:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_first_reading",
+      "lastKnownPipelineNode": "lords_first_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9006005,
+        "stageId": 1,
+        "sessionId": 40,
+        "label": "1st reading",
+        "abbreviation": "1R",
+        "house": "lords",
+        "sortOrder": 6,
+        "sittings": [
+          {
+            "id": 900601,
+            "date": "2026-08-25",
+            "sourceDateTime": "2026-08-25T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1007,
+          "name": "Bridget Calloway",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9006000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9006001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9006002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9006003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9006004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9006005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [
+            {
+              "id": 900601,
+              "date": "2026-08-25",
+              "sourceDateTime": "2026-08-25T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9022,
+      "title": "Small Business Support Bill",
+      "formerTitle": null,
+      "summary": "An Act to make provision about support for small businesses.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9022",
+      "billType": {
+        "id": 7,
+        "name": "Private Members' Bill (Ballot Bill)",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-06-11T15:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "enacted",
+      "pipelineNode": "royal_assent",
+      "lastKnownPipelineNode": "royal_assent",
+      "mappingMode": "terminal",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9022003,
+        "stageId": 11,
+        "sessionId": 40,
+        "label": "Royal Assent",
+        "abbreviation": "RA",
+        "house": "unassigned",
+        "sortOrder": 4,
+        "sittings": [],
+        "nextSittingDate": null,
+        "detail": "Royal Assent"
+      },
+      "sponsors": [
+        {
+          "memberId": 1020,
+          "name": "Kwame Latimer",
+          "house": "commons",
+          "party": "Example Party B",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9022000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9022001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9022002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9022003,
+          "stageId": 11,
+          "sessionId": 40,
+          "label": "Royal Assent",
+          "abbreviation": "RA",
+          "house": "unassigned",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "royal_assent",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9015,
+      "title": "Statute Law Revision Bill",
+      "formerTitle": null,
+      "summary": "A Bill to repeal enactments that are no longer of practical utility.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9015",
+      "billType": {
+        "id": 2,
+        "name": "Private Members' Bill (Starting in the House of Lords)",
+        "category": "Public"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "commons",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-27T10:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_first_reading",
+      "lastKnownPipelineNode": "commons_first_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9015005,
+        "stageId": 6,
+        "sessionId": 40,
+        "label": "1st reading",
+        "abbreviation": "1R",
+        "house": "commons",
+        "sortOrder": 6,
+        "sittings": [
+          {
+            "id": 901501,
+            "date": "2026-08-27",
+            "sourceDateTime": "2026-08-27T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1016,
+          "name": "Lord Example of Fenwick",
+          "house": "lords",
+          "party": "Crossbench",
+          "organisation": null
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9015000,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9015001,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9015002,
+          "stageId": 3,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "lords",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "lords_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9015003,
+          "stageId": 4,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "lords",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "lords_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9015004,
+          "stageId": 5,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "lords",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "lords_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9015005,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 6,
+          "sittings": [
+            {
+              "id": 901501,
+              "date": "2026-08-27",
+              "sourceDateTime": "2026-08-27T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9020,
+      "title": "Unattributed Origin Bill",
+      "formerTitle": null,
+      "summary": "A Bill whose originating House is not stated by the source.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9020",
+      "billType": {
+        "id": 4,
+        "name": "Hybrid Bill",
+        "category": "Hybrid"
+      },
+      "originatingHouse": "unassigned",
+      "currentHouse": "unassigned",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-12T10:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "commons_first_reading",
+      "lastKnownPipelineNode": "commons_first_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9020000,
+        "stageId": 6,
+        "sessionId": 40,
+        "label": "1st reading",
+        "abbreviation": "1R",
+        "house": "commons",
+        "sortOrder": 1,
+        "sittings": [
+          {
+            "id": 902001,
+            "date": "2026-08-12",
+            "sourceDateTime": "2026-08-12T00:00:00"
+          }
+        ],
+        "nextSittingDate": null,
+        "detail": null
+      },
+      "sponsors": [],
+      "history": [
+        {
+          "billStageId": 9020000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [
+            {
+              "id": 902001,
+              "date": "2026-08-12",
+              "sourceDateTime": "2026-08-12T00:00:00"
+            }
+          ],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": [
+        "unassigned_originating_house"
+      ]
+    },
+    {
+      "id": 9007,
+      "title": "Water Quality Bill",
+      "formerTitle": null,
+      "summary": "A Bill to make provision about the quality of inland waters.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9007",
+      "billType": {
+        "id": 1,
+        "name": "Government Bill",
+        "category": "Public"
+      },
+      "originatingHouse": "commons",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-24T13:20:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "lords_second_reading",
+      "lastKnownPipelineNode": "lords_second_reading",
+      "mappingMode": "direct",
+      "nonStandardRoute": false,
+      "stage": {
+        "billStageId": 9007006,
+        "stageId": 2,
+        "sessionId": 40,
+        "label": "2nd reading",
+        "abbreviation": "2R",
+        "house": "lords",
+        "sortOrder": 7,
+        "sittings": [
+          {
+            "id": 900701,
+            "date": "2026-09-09",
+            "sourceDateTime": "2026-09-09T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-09",
+        "detail": null
+      },
+      "sponsors": [
+        {
+          "memberId": 1008,
+          "name": "Steven Reedman",
+          "house": "commons",
+          "party": "Example Party A",
+          "organisation": "Example Department"
+        }
+      ],
+      "history": [
+        {
+          "billStageId": 9007000,
+          "stageId": 6,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "commons",
+          "sortOrder": 1,
+          "sittings": [],
+          "mappedNode": "commons_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007001,
+          "stageId": 7,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "commons",
+          "sortOrder": 2,
+          "sittings": [],
+          "mappedNode": "commons_second_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007002,
+          "stageId": 8,
+          "sessionId": 40,
+          "label": "Committee stage",
+          "abbreviation": "CS",
+          "house": "commons",
+          "sortOrder": 3,
+          "sittings": [],
+          "mappedNode": "commons_committee",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007003,
+          "stageId": 9,
+          "sessionId": 40,
+          "label": "Report stage",
+          "abbreviation": "RS",
+          "house": "commons",
+          "sortOrder": 4,
+          "sittings": [],
+          "mappedNode": "commons_report",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007004,
+          "stageId": 10,
+          "sessionId": 40,
+          "label": "3rd reading",
+          "abbreviation": "3R",
+          "house": "commons",
+          "sortOrder": 5,
+          "sittings": [],
+          "mappedNode": "commons_third_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007005,
+          "stageId": 1,
+          "sessionId": 40,
+          "label": "1st reading",
+          "abbreviation": "1R",
+          "house": "lords",
+          "sortOrder": 6,
+          "sittings": [],
+          "mappedNode": "lords_first_reading",
+          "mappingMode": "direct"
+        },
+        {
+          "billStageId": 9007006,
+          "stageId": 2,
+          "sessionId": 40,
+          "label": "2nd reading",
+          "abbreviation": "2R",
+          "house": "lords",
+          "sortOrder": 7,
+          "sittings": [
+            {
+              "id": 900701,
+              "date": "2026-09-09",
+              "sourceDateTime": "2026-09-09T00:00:00"
+            }
+          ],
+          "mappedNode": "lords_second_reading",
+          "mappingMode": "direct"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": []
+    },
+    {
+      "id": 9018,
+      "title": "Westhaven Harbour Bill",
+      "formerTitle": null,
+      "summary": "A Bill to confer powers on the Westhaven Harbour Authority.",
+      "parliamentUrl": "https://bills.parliament.uk/bills/9018",
+      "billType": {
+        "id": 6,
+        "name": "Private Bill",
+        "category": "Private"
+      },
+      "originatingHouse": "lords",
+      "currentHouse": "lords",
+      "introducedSessionId": 40,
+      "includedSessionIds": [
+        40
+      ],
+      "carriedOver": false,
+      "sourceLastUpdate": "2026-08-14T10:00:00.0000000",
+      "withdrawnSourceDate": null,
+      "status": "active",
+      "pipelineNode": "special_procedure",
+      "lastKnownPipelineNode": null,
+      "mappingMode": "special",
+      "nonStandardRoute": true,
+      "stage": {
+        "billStageId": 9018000,
+        "stageId": 41,
+        "sessionId": 40,
+        "label": "Examination for compliance with Standing Orders",
+        "abbreviation": "EX",
+        "house": "unassigned",
+        "sortOrder": 1,
+        "sittings": [
+          {
+            "id": 901801,
+            "date": "2026-09-10",
+            "sourceDateTime": "2026-09-10T00:00:00"
+          }
+        ],
+        "nextSittingDate": "2026-09-10",
+        "detail": "Examination for compliance with Standing Orders"
+      },
+      "sponsors": [],
+      "history": [
+        {
+          "billStageId": 9018000,
+          "stageId": 41,
+          "sessionId": 40,
+          "label": "Examination for compliance with Standing Orders",
+          "abbreviation": "EX",
+          "house": "unassigned",
+          "sortOrder": 1,
+          "sittings": [
+            {
+              "id": 901801,
+              "date": "2026-09-10",
+              "sourceDateTime": "2026-09-10T00:00:00"
+            }
+          ],
+          "mappedNode": null,
+          "mappingMode": "special"
+        }
+      ],
+      "pingPongExchangeNumber": null,
+      "detailsComplete": true,
+      "historyComplete": true,
+      "warnings": [
+        "no_canonical_predecessor",
+        "non_standard_route"
+      ]
+    }
+  ]
+}
