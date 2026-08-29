@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // End-to-end tests and the Playwright config run in Node, so they get Node
+    // typings. The application code deliberately does not: keeping these in a
+    // separate project is what stops a Node API leaking into the browser bundle.
+    "types": ["node"]
+  },
+  "include": ["e2e", "playwright.config.ts"]
+}
