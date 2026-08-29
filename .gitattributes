@@ -12,3 +12,4 @@
 
 # Executable on the runner regardless of the platform they were authored on.
 *.sh text eol=lf
+*.ico binary
